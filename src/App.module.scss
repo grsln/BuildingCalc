@@ -1,1 +1,39 @@
-
+.main {
+  display: grid;
+  place-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+.wrapper {
+  min-width: 200px;
+  width: 90%;
+}
+.window {
+  display: grid;
+  grid-template-rows: minmax(30px, 25%) 1fr;
+  border-style: solid;
+  border-width: 1px;
+  border-color: gray;
+}
+.appName {
+  text-align: center;
+  color: black;
+}
+.stepNumber {
+  text-align: center;
+  color: gray;
+}
+.title {
+  background-color: lightgray;
+  color: darkblue;
+  display: grid;
+  place-items: center;
+}
+.success {
+  text-align: center;
+  color: darkblue;
+}
+.error {
+  text-align: center;
+  color: red;
+}
