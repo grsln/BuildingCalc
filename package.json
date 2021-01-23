@@ -2,17 +2,32 @@
   "name": "BuildingCalc",
   "version": "1.0.0",
   "description": "Construction Price Calculator",
-  "main": "index.js",
+  "scripts": {
+    "build:dev": "env NODE_ENV=development webpack --config webpack.config.js",
+    "build:prod": "env NODE_ENV=production webpack --config webpack.config.js",
+    "start": "env NODE_ENV=development webpack-dev-server"
+  },
   "author": "grsln <grsln@yandex.ru>",
   "license": "MIT",
   "dependencies": {
+    "@types/classnames": "^2.2.11",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "classnames": "^2.2.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
+    "css-loader": "^5.0.1",
+    "html-webpack-plugin": "^4.5.1",
+    "sass": "^1.32.5",
+    "sass-loader": "^10.1.1",
+    "style-loader": "^2.0.0",
     "ts-loader": "^8.0.14",
     "typescript": "^4.1.3",
+    "typescript-plugin-css-modules": "^3.0.1",
     "webpack": "4.44.2",
-    "webpack-cli": "3.3.12"
+    "webpack-cli": "3.3.12",
+    "webpack-dev-server": "^3.11.2"
   }
 }
