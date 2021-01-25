@@ -16,4 +16,8 @@
   padding-left: 15px;
   padding-right: 15px;
   color: black;
+  cursor: pointer;
+  &:active {
+    background-color: lightgray;
+  }
 }
