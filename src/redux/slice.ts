@@ -1,35 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { BuildingEnum, IState, StepsEnum } from "../types";
+import { BuildingEnum, responses, StatusEnum, StepsEnum } from "../types";
+
+const initialState = {
+  isLoading: false,
+  isError: false,
+  stateStep: StepsEnum.BUILDING,
+  stepNumber: 1,
+  building: null,
+  height: 0,
+  material: null,
+  sizes: {
+    sizex: 0,
+    sizey: 0,
+  },
+  responseStatus: "",
+  responseMessage: "",
+};
 
 const toolkitSlice = createSlice({
   name: "toolkit",
-  initialState: <IState["toolkit"]>{
-    isLoading: false,
-    isError: false,
-    stateStep: StepsEnum.BUILDING,
-    stepNumber: 1,
-    building: null,
-    height: 0,
-    material: null,
-    sizes: {
-      sizex: 0,
-      sizey: 0,
-    },
-  },
+  initialState,
   reducers: {
-    firstStep(state) {
-      state.isLoading = false;
-      state.isError = false;
-      state.stateStep = StepsEnum.BUILDING;
-      state.stepNumber = 1;
-      state.building = null;
-      state.height = 0;
-      state.material = null;
-      state.sizes = {
-        sizex: 0,
-        sizey: 0,
-      };
-    },
+    firstStep: (state) => initialState,
     nextStep(state) {
       switch (state.stateStep) {
         case StepsEnum.BUILDING:
@@ -73,6 +65,25 @@ const toolkitSlice = createSlice({
     inputSizeY(state, action) {
       state.sizes.sizey = action.payload;
     },
+    startLoading(state) {
+      state.isError = false;
+      state.isLoading = true;
+    },
+    endLoading(state) {
+      state.isLoading = false;
+    },
+    errorLoading(state) {
+      state.isLoading = false;
+      state.isError = true;
+    },
+    setResponse(state, action) {
+      const status = responses.find(
+        ({ result }) => result === action.payload.result
+      )?.status;
+      state.responseStatus =
+        status && Object.values(StatusEnum).includes(status) ? status : "";
+      state.responseMessage = action.payload.message;
+    },
   },
 });
 
@@ -85,4 +96,8 @@ export const {
   inputHeight,
   inputSizeX,
   inputSizeY,
+  startLoading,
+  endLoading,
+  errorLoading,
+  setResponse,
 } = toolkitSlice.actions;

@@ -3,6 +3,22 @@ export enum BuildingEnum {
   GARAGE = "Гараж",
 }
 
+export type buildingType = {
+  build: BuildingEnum;
+  index: number;
+};
+
+export const buildingsApiIndex: buildingType[] = [
+  {
+    build: BuildingEnum.HOUSE,
+    index: 1,
+  },
+  {
+    build: BuildingEnum.GARAGE,
+    index: 2,
+  },
+];
+
 export enum MaterialEnum {
   BRICK = "Кирпич",
   BLOCK = "Шлакоблок",
@@ -11,7 +27,34 @@ export enum MaterialEnum {
   SENDWICH = "Сендвич-панели",
 }
 
-export type ArrMaterials = MaterialEnum[];
+type materialType = {
+  material: MaterialEnum;
+  index: number;
+};
+
+export const materialsApiIndex: materialType[] = [
+  {
+    material: MaterialEnum.BRICK,
+    index: 1,
+  },
+  {
+    material: MaterialEnum.BLOCK,
+    index: 2,
+  },
+  {
+    material: MaterialEnum.WOODEN_BAR,
+    index: 3,
+  },
+  {
+    material: MaterialEnum.METALL,
+    index: 4,
+  },
+  {
+    material: MaterialEnum.SENDWICH,
+    index: 5,
+  },
+];
+
 export const BuildingMaterial = new Map();
 BuildingMaterial.set(BuildingEnum.HOUSE, [
   MaterialEnum.BRICK,
@@ -53,5 +96,35 @@ export interface IState {
     height: number;
     material: MaterialEnum | null;
     sizes: ISizes;
+    responseStatus: string;
+    responseMessage: string;
   };
 }
+
+export interface IApi {
+  building?: number;
+  height: number;
+  material?: number;
+  sizex: number;
+  sizey: number;
+}
+
+export enum StatusEnum {
+  OK = "Успешно",
+  Error = "Ошибка",
+}
+
+interface IResponse {
+  status: StatusEnum;
+  result: string;
+}
+export const responses: IResponse[] = [
+  {
+    status: StatusEnum.OK,
+    result: "ok",
+  },
+  {
+    status: StatusEnum.Error,
+    result: "error",
+  },
+];

@@ -1,18 +1,28 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { nextStep, selectBuilding } from "../../redux/slice";
-import { BuildingEnum } from "../../types";
+import { useSelector } from "react-redux";
+import { IState, StatusEnum } from "../../types";
+import Loader from "../Loader";
 import s from "./result.module.scss";
 
 const Result = () => {
-  const dispatch = useDispatch();
-  const liClick = (build: BuildingEnum) => {
-    dispatch(selectBuilding(build));
-    dispatch(nextStep());
-  };
+  const state = useSelector<IState, IState["toolkit"]>(
+    (state) => state.toolkit
+  );
   return (
     <div className={s.main}>
-      <div className={s.message}>message</div>
+      <div className={s.message}>
+        {state.isLoading ? (
+          <Loader />
+        ) : state.isError ? (
+          <div className={s.error}>Ошибка загрузки</div>
+        ) : (
+          <div
+            className={state.responseStatus === StatusEnum.Error ? s.error : ""}
+          >
+            {state.responseMessage}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

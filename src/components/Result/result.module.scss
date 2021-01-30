@@ -8,5 +8,15 @@
   color: darkblue;
   margin: 20px;
   padding: 5px;
+  text-align: center;
 }
-
+.success {
+  text-align: center;
+  color: darkblue;
+}
+.error {
+  margin: 20px;
+  padding: 5px;
+  color: red;
+  text-align: center;
+}
